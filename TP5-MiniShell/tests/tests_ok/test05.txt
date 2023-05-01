@@ -1,0 +1,2 @@
+grep "sous" < input.txt
+./addition4.sh < number.txt

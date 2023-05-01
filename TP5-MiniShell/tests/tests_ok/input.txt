@@ -1,0 +1,6 @@
+Un système d’exploitation fournit à ses utilisateurs une interface de programmation
+comprenant des fonctions de création de processus, de manipulation des E/S, de travail
+avec les fichiers, etc. Ces appels système peuvent être faits dans un programme C quelconque (en utilisant les fonctions de bibliothèque standard, p.ex. fork, open, dup, ...) ou
+alors en ligne de commande. Dans le deuxième cas, un interprête de langage de commande
+qui transforme une commande tapée sous forme textuelle en un ou plusieurs appels système. Dans le système Unix, l’interprète du langage de commande est appelé un shell. Des
+exemples de shell sont tcsh, bash, ksh, etc.

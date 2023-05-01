@@ -1,0 +1,137 @@
+./echoserveri <numéro_de_port>
+<numéro_de_port> est le numéro de port sur lequel le serveur doit écouter les connexions entrantes.
+ Par exemple, on peut exécuter le serveur sur le port 4321 en utilisant la commande suivante:
+./echoserveri 4321
+
+Le symbole “&” à la fin de la commande permet de lancer le serveur en arrière-plan de sorte que vous
+ pouvez continuer à utiliser le terminal pour d’autres commandes.
+
+
+
+
+ Une fois que le serveur est en cours d’exécution, on peut compiler et exécuter le client en
+  utilisant les commandes appropriées. 
+    Par exemple, on peut exécuter le client sur le port 4321 en utilisant la commande suivante:
+  ./echoclient <adresse_IP_serveur> <numéro_de_port>
+    <adresse_IP_serveur> est l’adresse IP du serveur sur lequel le client doit se connecter.
+    On a par exemple localhost pour une machine locale.
+    <numéro_de_port> est le numéro de port sur lequel le serveur écoute les connexions entrantes.
+
+
+
+pkill echoserveri=Cela tuera tous les processus du serveur echoserveri.
+ Notez que cela fermera toutes les instances en cours d’exécution du programme, même si elles ont 
+ des connexions active
+
+
+
+utiliser la commande netstat -tulpn pour trouver les programmes qui utilisent des ports spécifiques.
+
+EXEMPLE:
+Connexions Internet actives (seulement serveurs)
+Proto Recv-Q Send-Q Adresse locale          Adresse distante        Etat       PID/Program name    
+tcp        0      0 127.0.0.1:37381         0.0.0.0:*              LISTEN      5998/node           
+tcp        0      0 0.0.0.0:10              0.0.0.0:*               LISTEN      602/./echoservercpo 
+tcp        0      0 0.0.0.0:2121            0.0.0.0:*               LISTEN      7262/./echoservercp 
+tcp        0      0 0.0.0.0:321             0.0.0.0:*               LISTEN      922/./echoservercdy 
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           -                   
+udp6       0      0 ::1:323                 :::*                                -                   
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP8-FileTransferProtocol# kill 7262
+Connexions Internet actives (seulement serveurs)
+Proto Recv-Q Send-Q Adresse locale          Adresse distante        Etat       PID/Program name    
+tcp        0      0 127.0.0.1:37381         0.0.0.0:*               LISTEN      5998/node           
+tcp        0      0 0.0.0.0:10              0.0.0.0:*               LISTEN      602/./echoservercpo 
+tcp        0      0 0.0.0.0:2121            0.0.0.0:*               LISTEN      7264/./echoservercp 
+tcp        0      0 0.0.0.0:321             0.0.0.0:*               LISTEN      922/./echoservercdy 
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           -                   
+udp6       0      0 ::1:323                 :::*                                -       
+
+
+METHODE2
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP7-Sockets# ps
+  PID TTY          TIME CMD
+10438 pts/10   00:00:01 bash
+13974 pts/10   00:00:00 echoservercpool
+13979 pts/10   00:00:00 echoservercpool
+13980 pts/10   00:00:00 echoservercpool
+13981 pts/10   00:00:00 echoservercpool
+13982 pts/10   00:00:00 echoservercpool
+14766 pts/10   00:00:00 echoservercdyn
+16283 pts/10   00:00:00 echoservercpool
+16285 pts/10   00:00:00 echoservercpool
+16286 pts/10   00:00:00 echoservercpool
+16287 pts/10   00:00:00 echoservercpool
+16288 pts/10   00:00:00 echoservercpool
+17692 pts/10   00:00:00 echoservercpool
+17694 pts/10   00:00:00 echoservercpool
+17695 pts/10   00:00:00 echoservercpool
+17696 pts/10   00:00:00 echoservercpool
+17697 pts/10   00:00:00 echoservercpool
+18149 pts/10   00:00:00 ps
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP7-Sockets# kill 13974 13979 13980 13981 13982 14766 16283 16285 16286 16287 16288 17692 17694 17696 17696 17697 18149
+Received SIGTERM signal, closing server...
+Received SIGTERM signal, closing server...
+Received SIGTERM signal, closing server...
+Received SIGTERM signal, closing server...
+Received SIGTERM signal, closing server...
+Child process 16286 terminated
+bash: kill: (18149) - Aucun processus de ce type
+Child process 16285 terminated
+Child process 16287 terminated
+Child process 16288 terminated
+[1]   Complété              ./echoservercpool1 2
+[2]   Complété              ./echoservercdyn 29
+[3]-  Fini                    ./echoservercpool1 3
+[4]+  Complété              ./echoservercpool1 4
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP7-Sockets# ps
+  PID TTY          TIME CMD
+10438 pts/10   00:00:01 bash
+17695 pts/10   00:00:00 echoservercpool
+20326 pts/10   00:00:00 ps
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP7-Sockets# kill 17695
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP7-Sockets# 
+
+
+
+
+
+
+
+
+
+
+TESTER
+3. Terminaison propre du serveur
+
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP8-FileTransferProtocol# ./echoservercpool1&
+[1] 19555
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP8-FileTransferProtocol# ./echoclient localhost
+client connected to server OS
+Client socket: IP 127.0.0.1 port 46572
+Server socket: IP 127.0.0.1 port 2121
+server connected to localhost (127.0.0.1)
+cc
+server received 3 bytes
+cc
+^C
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP8-FileTransferProtocol# ps  
+PID TTY          TIME CMD
+17955 pts/15   00:00:02 bash
+19555 pts/15   00:00:00 echoservercpool
+19557 pts/15   00:00:00 echoservercpool
+19558 pts/15   00:00:00 echoservercpool
+19943 pts/15   00:00:00 ps
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP8-FileTransferProtocol# fg./echoservercpool1
+^C
+(base) root@DESKTOP-U8HTM10:/home/babakar/SR/TP8-FileTransferProtocol# ps  PID TTY          TIME CMD
+17955 pts/15   00:00:02 bash
+20041 pts/15   00:00:00 ps
+
+
+NB:
+Le signal SIGTERM est envoyé aux processus enfants lorsque le processus père reçoit le signal SIGINT
+ (généré par la combinaison de touches CTRL+C). 
+ Cependantsi on  exécute le client et
+  non le serveur, il n’y a pas de processus enfants à terminer.
+
+  ctrl c on 

@@ -1,0 +1,63 @@
+/*
+ * echoserveri.c - An iterative echo server
+ */
+
+#include "csapp.h"
+
+#define MAX_NAME_LEN 256
+
+void echo(int connfd);
+
+/* 
+ * Note that this code only works with IPv4 addresses
+ * (IPv6 is not supported)
+ */
+int main(int argc, char **argv)
+{
+    int listenfd, connfd, port;
+    socklen_t clientlen;
+    struct sockaddr_in clientaddr;
+    char client_ip_string[INET_ADDRSTRLEN];
+    char client_hostname[MAX_NAME_LEN];
+    
+    if (argc != 2) {
+        fprintf(stderr, "usage: %s <port>\n", argv[0]);
+        exit(0);
+    }
+    port = atoi(argv[1]);
+    //Le code initialise la taille des informations sur le client en utilisant la fonction “sizeof”.
+    clientlen = (socklen_t)sizeof(clientaddr);
+
+
+
+    listenfd = Open_listenfd(port);//ouvre un socket d’écoute en utilisant la fonction “Open_listenfd” fournie par la bibliothèque “csapp.h”. Cette fonction crée un socket d’écoute sur le numéro de port spécifié et retourne le descripteur de fichier du socket d’écoute.
+    while (1) {
+        /*Accepte une connexion sur le socket d’écoute et retourne le descripteur de fichier du 
+        socket de connexion. Cette fonction bloque jusqu’à ce qu’une connexion soit acceptée. 
+        L’adresse du client est stockée dans la structure “clientaddr” et la taille de cette 
+        structure est stockée dans la variable “clientlen”.*/
+
+        connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen);
+        /* determine the name of the client */
+        /*Récupère le nom du client à partir de son adresse IP. Cette fonction bloque jusqu’à ce
+         que le nom du client soit récupéré.
+        Le code utilise la fonction “Getnameinfo” pour déterminer le nom d’hôte du client à partir
+         de ses informations d’adresse. La fonction stocke le nom d’hôte dans la variable 
+         “client_hostname”.*/
+        Getnameinfo((SA *) &clientaddr, clientlen,
+                    client_hostname, MAX_NAME_LEN, 0, 0, 0);
+        
+        /* determine the textual representation of the client's IP address */
+        
+        Inet_ntop(AF_INET, &clientaddr.sin_addr, client_ip_string,
+                  INET_ADDRSTRLEN);
+        
+        printf("server connected to %s (%s)\n", client_hostname,
+               client_ip_string);
+
+        echo(connfd);
+        Close(connfd);
+    }
+    exit(0);
+}
+

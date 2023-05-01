@@ -1,0 +1,7 @@
+cat number.txt | sort -n
+cat number.txt | sort -n |head -2
+cat number.txt | sort -n |tail -2
+sort<number.txt|uniq | sed 's/^/INT./' > output.txt
+sort<number.txt|uniq | sed 's/^/INT./' | sed 's/$/;/' > output.txt
+sort<number.txt|uniq | sed 's/^/INT./' | sed 's/$/;/' | sed 's/INT.0/INT./' > output.txt
+sort<number.txt|uniq | sed 's/^/INT./' | sed 's/$/;/' | sed 's/INT.0/INT./' | sed 's/INT.1/INT./' > output.txt

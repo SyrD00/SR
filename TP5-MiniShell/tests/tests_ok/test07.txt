@@ -1,0 +1,5 @@
+ls&
+cat number.txt&
+./addition4.sh < number.txt&
+ps
+

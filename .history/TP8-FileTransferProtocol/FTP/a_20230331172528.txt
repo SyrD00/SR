@@ -1,0 +1,9 @@
+Transfert de fichier
+Ce travail prépare le deuxième gros TP à rendre qui portera sur l’implémentation d’un serveur de fichiers à la FTP 2
+
+Remplacer le programme echo sur le serveur par un programme qui lit un nom de
+fichier et renvoie le contenu de ce fichier. Le client indique le nom du fichier demandé ; le
+serveur envoie en retour le contenu du fichier puis ferme la connexion (une seule demande
+de fichier par connexion).
+Adapter en conséquence les programmes du client et du serveur. Faire fonctionner le
+système client-serveur avec ce nouveau service.

@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) 2002, Simon Nieuviarts
+ */
+#include <stdbool.h>
+
+#ifndef __READCMD_H
+#define __READCMD_H
+
+/* Read a command line from input stream. Return null when input closed.
+Display an error and call exit() in case of memory exhaustion. */
+struct cmdline *readcmd(void);
+
+
+/* Structure returned by readcmd() */
+struct cmdline {
+	char *err;	/* If not null, it is an error message that should be
+			   displayed. The other fields are null. */
+	char *in;	/* If not null : name of file for input redirection. */
+	char *out;	/* If not null : name of file for output redirection. */
+	char ***seq;	/* See comment below */
+	bool bg;	/* True if the command must be executed in background */
+};
+
+/* Field seq of struct cmdline :
+A command line is a sequence of commands whose output is linked to the input
+of the next command by a pipe. To describe such a structure :
+A command is an array of strings (char **), whose last item is a null pointer.
+A sequence is an array of commands (char ***), whose last item is a null
+pointer.
+When a struct cmdline is returned by readcmd(), seq[0] is never null.
+*/
+
+
+void quitter();
+void interprete(char **commande);
+void redirection_entree(char *in);
+void redirection_sortie(char *out);
+void  gestion_erreur();
+void execute_2command(char **commande1, char **commande2);
+void execute_3command(char **commande1, char **commande2, char **commande3);
+
+void execute_Ncommand(char ***seq);
+
+int nombre_commande(char ***sequence_commande);
+
+
+void execute_background(char **cmd);
+
+
+void sigchld_handler(int sig);
+
+
+
+#endif
+

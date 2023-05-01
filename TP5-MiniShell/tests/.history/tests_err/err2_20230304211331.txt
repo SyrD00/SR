@@ -1,0 +1,4 @@
+touch tmp.txt
+chmod -r tmp.txt
+cat tmp.txt
+rm tmp.txt

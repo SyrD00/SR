@@ -1,0 +1,7 @@
+
+seq[0]: sort 
+
+seq[1]: uniq 
+
+seq[2]: sed 's/^/INT./' 
+shell> exit

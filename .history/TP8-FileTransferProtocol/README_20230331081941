@@ -1,0 +1,13 @@
+./echoserveri <numéro_de_port>
+<numéro_de_port> est le numéro de port sur lequel le serveur doit écouter les connexions entrantes.
+ Par exemple, on peut exécuter le serveur sur le port 4321 en utilisant la commande suivante:
+./echoserveri 4321
+
+Le symbole “&” à la fin de la commande permet de lancer le serveur en arrière-plan de sorte que vous
+ pouvez continuer à utiliser le terminal pour d’autres commandes.
+
+
+
+
+ Une fois que le serveur est en cours d’exécution, on peut compiler et exécuter le client en
+  utilisant les commandes appropriées. 

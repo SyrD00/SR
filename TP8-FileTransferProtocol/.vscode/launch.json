@@ -1,0 +1,65 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "launchServer",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/echoserverpool",
+            "args": ["&"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "launchClient",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/echoclient",
+            "args": ["localhost"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        { 
+            "name": "Client", 
+            "type": "chrome", 
+            "request": "launch", 
+            "url": " http:// localhost:8000/ ", 
+            "webRoot": "${workspaceRoot}" 
+        } ,
+        { 
+            "type": "node", 
+            "request": "launch", 
+            "name": "Server", 
+            "runtimeExecutable": "nodemon", 
+            "program": "${workspaceRoot}", 
+            "console": "integratedTerminal" 
+        } 
+        
+    ],
+    "compounds": [
+        {
+            "name": "Server/Client",
+            "configurations": ["launchServer", "launchClient"]
+        }
+    ]
+}

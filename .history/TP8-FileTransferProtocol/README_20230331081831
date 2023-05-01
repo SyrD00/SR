@@ -1,0 +1,3 @@
+./echoserveri <numéro_de_port>
+<numéro_de_port> est le numéro de port sur lequel le serveur doit écouter les connexions entrantes.
+ Par exemple, on peut exécuter le serveur sur le port 4321 en utilisant la commande suivante
